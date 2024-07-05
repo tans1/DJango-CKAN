@@ -1,0 +1,70 @@
+<div class="col-md-10">
+    <div class="row">
+      {% for dataset in datasets %}
+      <div class="col-md-11 mb-3">
+        <div class="card h-100">
+          <div class="row g-0">
+            <div class="col-md-4">
+              {% if dataset.organization.image_url %}
+              <img src="{{ dataset.organization.image_url }}" class="img-fluid rounded-start" alt="{{ dataset.title }}">
+              {% else %}
+              <div class="text-center" style="font-size: 150px;">🏢</div>
+              {% endif %}
+              <p class="text-center mt-2">
+                <strong>Organization:</strong> {{ dataset.organization.title }}
+              </p>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <strong>Title:</strong> {{ dataset.title }}
+                </h5>
+                <p class="card-text">
+                  <strong>Description:</strong> {{ dataset.description }}
+                </p>
+                <p class="card-text">
+                  <strong>Tags:</strong>
+                  {% for tag in dataset.tags %}
+                  <span class="badge bg-secondary">{{ tag }}</span>
+                  {% endfor %}
+                </p>
+                <p class="card-text">
+                  <strong>Author:</strong> {{ dataset.author }}
+                </p>
+                <p class="card-text">
+                  <strong>Creation Date:</strong> {{ dataset.creation_date }}
+                </p>
+                <p class="card-text">
+                  <strong>License:</strong> :{{ dataset.license.title }}
+                </p>
+                <p class="card-text">
+                  <strong>Resources:</strong>
+                  <ul>
+                    {% for resource in dataset.resources %}
+                    <li>
+                      <a href="{{ resource.url }}" target="_blank">{{ resource.name }}</a> ({{ resource.format }})
+                      {% if resource.description %}
+                      <br>{{ resource.description }}
+                      {% endif %}
+                      <br><small>Created: {{ resource.created }}</small>
+                      <br><small>Size: {{ resource.size }} bytes</small>
+                      
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </p>
+
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                {% endfor %}
+                
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <p class="card-text"><pre>{{ json }}</pre></p>
+  </div>
+  
